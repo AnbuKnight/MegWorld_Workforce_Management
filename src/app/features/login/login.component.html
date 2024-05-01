@@ -1,0 +1,168 @@
+<div class="loginSection">
+  <div class="container" id="container">
+    <div class="form-container log-in-container">
+      <!-- <form action="#">
+        <h1>Login</h1>
+        <div class="social-container">
+          <a href="#" class="social"><i class="fa fa-facebook fa-2x"></i></a>
+          <a href="#" class="social"><i class="fab fa fa-twitter fa-2x"></i></a>
+        </div>
+        <span>or use your account</span>
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <a href="#">Forgot your password?</a>
+        <button>Log In</button>
+      </form> -->
+      <div class="loginSection1">
+        <div class="main">
+          <input type="checkbox" id="chk" aria-hidden="true" />
+
+          <div class="signup">
+            <!-- <mat-card-content> -->
+            <form>
+              <label for="chk" aria-hidden="true">Sign up</label>
+
+              <mat-form-field class="inputFieldsWidth inputEmailMargin">
+                <mat-label>Name</mat-label>
+                <input type="text" matInput [formControl]="NameFormControl" />
+                <mat-error *ngIf="NameFormControl.hasError('required')"
+                  >Name is <strong>required</strong></mat-error
+                >
+              </mat-form-field>
+
+              <mat-form-field class="inputFieldsWidth">
+                <mat-select
+                  name="countryReactiveVaraible"
+                  [formControl]="roleFormControl"
+                  placeholder="User role"
+                >
+                  <mat-option
+                    *ngFor="let role of userRoles"
+                    [value]="role.roleName"
+                  >
+                    {{ role.roleName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="inputFieldsWidth">
+                <mat-label>Email</mat-label>
+                <input
+                  type="email"
+                  matInput
+                  [formControl]="emailFormControl"
+                  [errorStateMatcher]="matcher"
+                  placeholder="Ex. pat@example.com"
+                />
+                <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                <mat-error
+                  *ngIf="
+                    emailFormControl.hasError('email') &&
+                    !emailFormControl.hasError('required')
+                  "
+                  >Please enter a valid email address
+                </mat-error>
+
+                <mat-error *ngIf="emailFormControl.hasError('required')"
+                  >Email is <strong>required</strong></mat-error
+                >
+              </mat-form-field>
+
+              <mat-form-field class="inputFieldsWidth">
+                <mat-label>Password</mat-label>
+                <input
+                  type="password"
+                  matInput
+                  [formControl]="passwordFormControl"
+                  [errorStateMatcher]="matcher"
+                />
+
+                <mat-error *ngIf="emailFormControl.hasError('required')"
+                  >Password is <strong>required</strong></mat-error
+                >
+              </mat-form-field>
+
+              <mat-form-field class="inputFieldsWidth">
+                <mat-label>Confirm Password</mat-label>
+                <input
+                  type="password"
+                  matInput
+                  [formControl]="confirmPasswordFormControl"
+                />
+
+                <mat-error
+                  *ngIf="confirmPasswordFormControl.hasError('required')"
+                  >Confirming the password is
+                  <strong>required</strong></mat-error
+                >
+              </mat-form-field>
+
+              <button (click)="registerUser()" style="border: solid">
+                Sign up
+              </button>
+            </form>
+            <!-- </mat-card-content> -->
+          </div>
+
+          <div class="login">
+            <mat-card-content>
+              <form>
+                <label for="chk" aria-hidden="true">Login</label>
+
+                <mat-form-field class="inputFieldsWidth">
+                  <mat-label>Email</mat-label>
+                  <input
+                    type="email"
+                    matInput
+                    [formControl]="emailFormControl"
+                    [errorStateMatcher]="matcher"
+                    placeholder="Ex. pat@example.com"
+                  />
+                  <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                  <mat-error
+                    *ngIf="
+                      emailFormControl.hasError('email') &&
+                      !emailFormControl.hasError('required')
+                    "
+                    >Please enter a valid email address
+                  </mat-error>
+
+                  <mat-error *ngIf="emailFormControl.hasError('required')"
+                    >Email is <strong>required</strong></mat-error
+                  >
+                </mat-form-field>
+
+                <mat-form-field class="inputFieldsWidth">
+                  <mat-label>Password</mat-label>
+                  <input
+                    type="password"
+                    matInput
+                    [formControl]="passwordFormControl"
+                  />
+
+                  <mat-error *ngIf="passwordFormControl.hasError('required')"
+                    >Password is <strong>required</strong></mat-error
+                  >
+                </mat-form-field>
+
+                <button (click)="getUser()">Login</button>
+              </form>
+            </mat-card-content>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-right">
+          <div class="imageTransition">
+            <img src="../../../assets/images/image_1.jpg" />
+            <img src="../../../assets/images/image_2.jpg" />
+            <img src="../../../assets/images/image_3.jpg" />
+            <img src="../../../assets/images/image_4.jpg" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

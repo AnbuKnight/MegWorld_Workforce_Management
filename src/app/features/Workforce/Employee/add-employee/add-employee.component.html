@@ -1,0 +1,556 @@
+<div class="col-md-12 addClientContainer">
+  <!-- <div class="row"> -->
+  <mat-stepper
+    class="example-stepper"
+    [orientation]="(stepperOrientation | async)!"
+  >
+    <mat-step [stepControl]="firstFormGroup" label="Personal Details">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-card class="matCard">
+            <mat-card-header class="matCardHeader"> </mat-card-header>
+            <mat-card-content class="matCardClass">
+              <form [formGroup]="firstFormGroup">
+                <div class="container row" id="container">
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>First Name</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="FirstNameFormControl"
+                    />
+                    <mat-error
+                      *ngIf="
+                        firstFormGroup.controls.FirstNameFormControl.hasError(
+                          'required'
+                        )
+                      "
+                      >First Name is <strong>required</strong></mat-error
+                    >
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Last Name</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="LastNameFormControl"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Email</mat-label>
+                    <input
+                      type="email"
+                      matInput
+                      formControlName="emailFormControl"
+                      [errorStateMatcher]="matcher"
+                      placeholder="Ex. pat@example.com"
+                    />
+                    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                    <mat-error
+                      *ngIf="
+                        firstFormGroup.controls.emailFormControl.hasError(
+                          'email'
+                        ) &&
+                        !firstFormGroup.controls.emailFormControl.hasError(
+                          'required'
+                        )
+                      "
+                      >Please enter a valid email address
+                    </mat-error>
+
+                    <mat-error
+                      *ngIf="
+                        firstFormGroup.controls.emailFormControl.hasError(
+                          'required'
+                        )
+                      "
+                      >Email is <strong>required</strong></mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Phone</mat-label>
+                    <input
+                      type="number"
+                      matInput
+                      formControlName="phoneFormControl"
+                    />
+                  </mat-form-field>
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Address</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="addressFormControl"
+                    />
+                  </mat-form-field>
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Pin Code</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="zipCodeFormControl"
+                    />
+                    <mat-error
+                      *ngIf="
+                        firstFormGroup.controls.zipCodeFormControl.hasError(
+                          'required'
+                        )
+                      "
+                      >Pin Code is <strong>required</strong></mat-error
+                    >
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Country</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Select a country"
+                      aria-label="Country"
+                      matInput
+                      formControlName="countryFormControl"
+                      [matAutocomplete]="countrySelection"
+                    />
+                    <mat-autocomplete #countrySelection="matAutocomplete">
+                      <mat-option
+                        *ngFor="let country of filteredCountryList | async"
+                        [value]="country"
+                      >
+                        {{ country }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>State</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Select a state"
+                      aria-label="State"
+                      matInput
+                      formControlName="stateFormControl"
+                      [matAutocomplete]="stateSelection"
+                    />
+                    <mat-autocomplete #stateSelection="matAutocomplete">
+                      <mat-option
+                        *ngFor="let state of filteredStateList | async"
+                        [value]="state"
+                      >
+                        {{ state }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>City</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Select a city"
+                      aria-label="City"
+                      matInput
+                      formControlName="cityFormControl"
+                      [matAutocomplete]="citySelection"
+                    />
+                    <mat-autocomplete #citySelection="matAutocomplete">
+                      <mat-option
+                        *ngFor="let city of filteredCityList | async"
+                        [value]="city"
+                      >
+                        {{ city }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Country of Birth</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Select a country"
+                      aria-label="Country"
+                      matInput
+                      formControlName="countryOfBirthFormControl"
+                      [matAutocomplete]="countryOfBirthSelection"
+                    />
+                    <mat-autocomplete
+                      #countryOfBirthSelection="matAutocomplete"
+                    >
+                      <mat-option
+                        *ngFor="
+                          let country of filteredCountryOfBirthList | async
+                        "
+                        [value]="country"
+                      >
+                        {{ country }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>State of Birth</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Select a state"
+                      aria-label="State"
+                      matInput
+                      formControlName="stateOfBirthFormControl"
+                      [matAutocomplete]="stateOfBirthSelection"
+                    />
+                    <mat-autocomplete #stateOfBirthSelection="matAutocomplete">
+                      <mat-option
+                        *ngFor="let state of filteredStateOfBirthList | async"
+                        [value]="state"
+                      >
+                        {{ state }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>City of Birth</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Select a city"
+                      aria-label="City"
+                      matInput
+                      formControlName="cityOfBirthFormControl"
+                      [matAutocomplete]="cityOfBirthSelection"
+                    />
+                    <mat-autocomplete #cityOfBirthSelection="matAutocomplete">
+                      <mat-option
+                        *ngFor="let city of filteredCityOfBirthList | async"
+                        [value]="city"
+                      >
+                        {{ city }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Nationality</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="nationalityFormControl"
+                    />
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Date of Birth</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="dateOfBirth"
+                      formControlName="dateOfBirthFormControl"
+                    />
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle
+                      matIconSuffix
+                      [for]="dateOfBirth"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #dateOfBirth></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="col-md-6 stepperButtons">
+          <div>
+            <button mat-button matStepperNext class="stepperNextButton">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Company Details">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-card class="matCard">
+            <mat-card-header class="matCardHeader"> </mat-card-header>
+            <mat-card-content class="matCardClass">
+              <form [formGroup]="secondFormGroup">
+                <div class="container row" id="container">
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Company</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="companyFormControl"
+                    />
+                    <!-- <mat-error
+                      *ngIf="
+                        secondFormGroup.controls.firstNameFormControl.hasError(
+                          'required'
+                        )
+                      "
+                      >First Name is <strong>required</strong></mat-error
+                    > -->
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Position</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Select a position"
+                      aria-label="Position"
+                      matInput
+                      formControlName="positionFormControl"
+                      [matAutocomplete]="positionSelection"
+                    />
+                    <mat-autocomplete #positionSelection="matAutocomplete">
+                      <mat-option
+                        *ngFor="let position of filteredPositionList | async"
+                        [value]="position"
+                      >
+                        {{ position }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Role</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Select a role"
+                      aria-label="Role"
+                      matInput
+                      formControlName="roleFormControl"
+                      [matAutocomplete]="roleSelection"
+                    />
+                    <mat-autocomplete #roleSelection="matAutocomplete">
+                      <mat-option
+                        *ngFor="let role of filteredRoleList | async"
+                        [value]="role"
+                      >
+                        {{ role }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Department</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Select a department"
+                      aria-label="Department"
+                      matInput
+                      formControlName="departmentFormControl"
+                      [matAutocomplete]="departmentSelection"
+                    />
+                    <mat-autocomplete #departmentSelection="matAutocomplete">
+                      <mat-option
+                        *ngFor="
+                          let department of filteredDepartmentList | async
+                        "
+                        [value]="department"
+                      >
+                        {{ department }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>SIA Licence Number</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="siaLicenceFormControl"
+                    />
+                    <!-- <mat-error
+                      *ngIf="
+                        secondFormGroup.controls.firstNameFormControl.hasError(
+                          'required'
+                        )
+                      "
+                      >First Name is <strong>required</strong></mat-error
+                    > -->
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Licence Expire Date</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="licenceExpiry"
+                      formControlName="licenceExpiryFormControl"
+                    />
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle
+                      matIconSuffix
+                      [for]="licenceExpiry"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #licenceExpiry></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="col-md-6 stepperButtons">
+          <div>
+            <button mat-button matStepperPrevious class="stepperBackButton">
+              Back
+            </button>
+            <button mat-button matStepperNext class="stepperNextButton">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+    <!-- </div> -->
+    <!-- <br /> -->
+
+    <!-- <div class="row"> -->
+    <mat-step [stepControl]="thirdFormGroup" label="Others">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-card class="matCard">
+            <mat-card-header class="matCardHeader"> </mat-card-header>
+            <mat-card-content class="matCardClass">
+              <form [formGroup]="thirdFormGroup">
+                <div class="container row" id="container">
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Sub Staff PIN</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="subStaffPinFormControl"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>EDBS NUMBER</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="EDBSnumberFormControl"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>N.I. NUMBER</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="NInumberFormControl"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>TRAINING NAME</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="trainingNameFormControl"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>CERTIFICATE NUMBER</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      formControlName="certificateNumberFormControl"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>PMVA Trained officer?</mat-label>
+                    <input
+                      type="text"
+                      aria-label="isPMVATrained"
+                      matInput
+                      formControlName="pmvaTrainedFormControl"
+                      [matAutocomplete]="PMVATrained"
+                    />
+                    <mat-autocomplete #PMVATrained="matAutocomplete">
+                      <mat-option
+                        *ngFor="
+                          let isPMVATrained of filteredPMVATrainedList | async
+                        "
+                        [value]="isPMVATrained"
+                      >
+                        {{ isPMVATrained }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label
+                      >Do you need visa to work or remain in the UK?</mat-label
+                    >
+                    <input
+                      type="text"
+                      aria-label="isUKVISANeeded"
+                      matInput
+                      formControlName="UKvisaNeededFormControl"
+                      [matAutocomplete]="isUKvisaNeeded"
+                    />
+                    <mat-autocomplete #isUKvisaNeeded="matAutocomplete">
+                      <mat-option
+                        *ngFor="
+                          let isUKvisaNeeded of filteredIsUKVISANeededList
+                            | async
+                        "
+                        [value]="isUKvisaNeeded"
+                      >
+                        {{ isUKvisaNeeded }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Visa Type</mat-label>
+                    <input
+                      type="text"
+                      aria-label="visaType"
+                      matInput
+                      formControlName="visaTypeFormControl"
+                      [matAutocomplete]="visaType"
+                    />
+                    <mat-autocomplete #visaType="matAutocomplete">
+                      <mat-option
+                        *ngFor="let VISATYPE of filteredVisaTypeList | async"
+                        [value]="VISATYPE"
+                      >
+                        {{ VISATYPE }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Visa Expiry</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="visaExpiry"
+                      formControlName="visaExpiryFormControl"
+                    />
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle
+                      matIconSuffix
+                      [for]="visaExpiry"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #visaExpiry></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="col-md-6 stepperButtons">
+          <div>
+            <button mat-button matStepperPrevious class="stepperBackButton">
+              Back
+            </button>
+            <button
+              mat-button
+              type="submit"
+              (click)="onSubmit()"
+              class="submitButton"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+    <!-- </div> -->
+  </mat-stepper>
+</div>

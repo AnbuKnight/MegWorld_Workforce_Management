@@ -1,0 +1,70 @@
+.container {
+  /* background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    width: 90%;
+    max-width: 100%;
+    min-height: 650px; */
+
+  border-radius: 5px;
+  background: linear-gradient(
+    90deg,
+    rgba(212, 86, 99, 1) 0%,
+    rgba(247, 228, 243, 1) 100%
+  );
+  /* padding: 20px; */
+  margin: 0;
+}
+.matCardHeader {
+  margin: -7px 0 7px 0;
+}
+.matCard {
+  /* background-color: lightslategray; */
+  background: transparent;
+}
+/* .example-stepper {
+    margin-top: 8px;
+  } */
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+.stepperButtons {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.stepperBackButton {
+  margin: 10px 0 0 0;
+  background: cornflowerblue;
+}
+.stepperNextButton {
+  margin: 10px 0px 0 10px;
+  background: darkturquoise;
+}
+::ng-deep .mat-horizontal-content-container {
+  padding: 0 !important;
+}
+.submitButton {
+  margin: 10px 0px 0 10px;
+  background: limegreen;
+}
+button:disabled {
+  opacity: 0.4;
+  color: white;
+}
+button.disabled:hover {
+  cursor: not-allowed;
+}
+.addClientContainer {
+  margin: 3px 0 0 0;
+  padding: 0;
+  height: calc(100vh - 75px);
+  background: bisque;
+}
+mat-stepper {
+  height: calc(100vh - 70px);
+  background: lavenderblush;
+}

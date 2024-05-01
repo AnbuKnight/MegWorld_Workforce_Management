@@ -1,0 +1,16 @@
+.top_stats_wrapper {
+  padding: 5px 15px 15px 15px;
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #dce1ef;
+}
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.mbot15 {
+  margin-bottom: 15px;
+}
+.anchorTag {
+  text-decoration: none;
+}

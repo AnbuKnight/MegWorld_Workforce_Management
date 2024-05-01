@@ -1,0 +1,145 @@
+<div class="col-md-12 addClientContainer">
+  <!-- <div class="row"> -->
+  <mat-stepper
+    class="example-stepper"
+    [orientation]="(stepperOrientation | async)!"
+  >
+    <mat-step [stepControl]="firstFormGroup" label="Event Details">
+      <div class="row">
+        <div class="col-md-6">
+          <mat-card class="matCard">
+            <mat-card-header class="matCardHeader"> </mat-card-header>
+            <mat-card-content class="matCardClass">
+              <form [formGroup]="firstFormGroup">
+                <div class="container row" id="container">
+                  <mat-form-field>
+                    <mat-label>Event Date</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="eventDate"
+                      formControlName="eventDateFormControl"
+                    />
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle
+                      matIconSuffix
+                      [for]="eventDate"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #eventDate></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Event Type</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Select an event type"
+                      aria-label="eventType"
+                      matInput
+                      formControlName="eventTypeFormControl"
+                      [matAutocomplete]="eventTypeSelection"
+                    />
+                    <mat-autocomplete #eventTypeSelection="matAutocomplete">
+                      <mat-option
+                        *ngFor="let eventType of filteredEventTypeList | async"
+                        [value]="eventType"
+                      >
+                        {{ eventType }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Event Detail</mat-label>
+                    <input
+                      type="textArea"
+                      matInput
+                      formControlName="paymentTermFormControl"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Connect Event to</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Connect Event to"
+                      aria-label="connectEventTo"
+                      matInput
+                      formControlName="connectEventToFormControl"
+                      [matAutocomplete]="connectEventToSelection"
+                    />
+                    <mat-autocomplete
+                      #connectEventToSelection="matAutocomplete"
+                    >
+                      <mat-option
+                        *ngFor="
+                          let connectEventTo of filteredConnectEventToList
+                            | async
+                        "
+                        [value]="connectEventTo"
+                      >
+                        {{ connectEventTo }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Employee / subcontractor</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Select"
+                      aria-label="empOrSub"
+                      matInput
+                      formControlName="empOrSubFormControl"
+                      [matAutocomplete]="empOrSubSelection"
+                    />
+                    <mat-autocomplete #empOrSubSelection="matAutocomplete">
+                      <mat-option
+                        *ngFor="let empOrSub of filteredEmpOrSubList | async"
+                        [value]="empOrSub"
+                      >
+                        {{ empOrSub }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+
+                  <mat-form-field class="inputFieldsWidth">
+                    <mat-label>Site</mat-label>
+                    <input
+                      type="text"
+                      placeholder="Select a site"
+                      aria-label="Site"
+                      matInput
+                      formControlName="siteFormControl"
+                      [matAutocomplete]="siteSelection"
+                    />
+                    <mat-autocomplete #siteSelection="matAutocomplete">
+                      <mat-option
+                        *ngFor="let site of filteredSiteList | async"
+                        [value]="site"
+                      >
+                        {{ site }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="col-md-6 stepperButtons">
+          <div>
+            <button
+              mat-button
+              type="submit"
+              (click)="onSubmit()"
+              class="submitButton"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+
+    <!-- </div> -->
+  </mat-stepper>
+</div>
