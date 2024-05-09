@@ -12,7 +12,7 @@ import {
 import { MatCardModule } from '@angular/material/card';
 import { ErrorStateMatcher, MAT_DATE_FORMATS } from '@angular/material/core';
 import { StepperOrientation } from '@angular/material/stepper';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, Subscription, map, startWith } from 'rxjs';
 import { LoginUserModel, Users } from 'src/app/core/models/model/users';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { LoginServiceService } from 'src/app/core/services/login-service.service';
@@ -39,6 +39,7 @@ import { DataShareService } from 'src/app/core/services/data-share.service';
   //providers: [{ provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format }],
 })
 export class AddClientComponent implements OnInit {
+  private subscription: Subscription;
   constructor(
     breakpointObserver: BreakpointObserver,
     private _formBuilder: FormBuilder,
@@ -50,15 +51,16 @@ export class AddClientComponent implements OnInit {
       .observe('(min-width: 800px)')
       .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
 
-    if (this.isNew == false) {
-      this.dataShareService.getData().subscribe((data) => {
-        this.selectedRowDataFromClientView = data;
-        if (data != '' && data != null && data != undefined) {
-          this.isNew = false;
-          this.loadClientData();
-        }
-      });
-    }
+    //if (this.isNew == false) {
+    this.subscription = this.dataShareService.getData().subscribe((data) => {
+      this.selectedRowDataFromClientView = data;
+      if (data != '' && data != null && data != undefined) {
+        this.isNew = false;
+        this.loadClientData();
+        this.dataShareService.clearData();
+      }
+    });
+    //}
   }
   ngOnInit() {
     this.filteredCountryList =
@@ -85,6 +87,11 @@ export class AddClientComponent implements OnInit {
         map((value) => this._filterInvoiceTerm(value || ''))
       );
   }
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 
   @Input() error: string | null | undefined;
   @Output() submitEM = new EventEmitter();
@@ -93,18 +100,18 @@ export class AddClientComponent implements OnInit {
   isNew: boolean = true;
 
   firstFormGroup = this._formBuilder.group({
-    CompanyFormControl: ['', Validators.required],
+    CompanyFormControl: ['', [Validators.required]],
     StreetFormControl: [''],
     countryFormControl: [''],
     stateFormControl: [''],
     cityFormControl: [''],
-    zipCodeFormControl: ['', Validators.required],
+    zipCodeFormControl: ['', [Validators.required]],
   });
   secondFormGroup = this._formBuilder.group({
-    firstNameFormControl: ['', Validators.required],
-    lastNameFormControl: ['', Validators.required],
+    firstNameFormControl: ['', [Validators.required]],
+    lastNameFormControl: ['', [Validators.required]],
     phoneFormControl: [''],
-    emailFormControl: ['', Validators.required, Validators.email],
+    emailFormControl: ['', [Validators.required, Validators.email]],
     contactFaxFormControl: [''],
   });
   thirdFormGroup = this._formBuilder.group({
