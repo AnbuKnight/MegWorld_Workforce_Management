@@ -15,4 +15,8 @@ export class DataShareService {
   getData() {
     return this.clientData.asObservable();
   }
+
+  clearData() {
+    this.clientData.next('');
+  }
 }
